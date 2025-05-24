@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Editar Produto</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label>Nome</label>
+      <input type="text" name="nome" class="form-control" value="{{ produto.nome }}" required>
+    </div>
+    <div class="mb-3">
+      <label>Quantidade</label>
+      <input type="number" name="quantidade" class="form-control" value="{{ produto.quantidade }}" required>
+    </div>
+    <div class="mb-3">
+      <label>Preço</label>
+      <input type="number" step="0.01" name="preco" class="form-control" value="{{ produto.preco }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href="{% url 'ver_estoque' %}" class="btn btn-danger">Cancelar</a>
+  </form>
+</div>
+<br><br>
+<div class="dashboard-cards">
+    <div class="card card-edicao">
+    <h2>Você está editando:</h2>
+    <p>Produto: {{ produto.nome }}</p>
+    <p>Quantidade: {{ produto.quantidade }}</p>
+    <p>R${{ produto.preco  }}</p>
+    </div>
+</div>
+{% endblock %}
