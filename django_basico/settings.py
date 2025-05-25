@@ -22,7 +22,7 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Corrige W005
 SECURE_HSTS_PRELOAD = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
-SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
@@ -36,7 +36,7 @@ SECRET_KEY = "Cu1xYpVQXNLj-kcKSC8GzRwdqwW4M8n0Y2pKHCVn4hxgcQrTyGVGJfgC6CoF81k6t3
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["cristyan.pythonanywhere.com", "localhost", "127.0.0.1"]
 
