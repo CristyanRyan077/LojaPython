@@ -36,7 +36,7 @@ SECRET_KEY = "Cu1xYpVQXNLj-kcKSC8GzRwdqwW4M8n0Y2pKHCVn4hxgcQrTyGVGJfgC6CoF81k6t3
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["cristyan.pythonanywhere.com", "localhost", "127.0.0.1"]
 
