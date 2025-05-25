@@ -9,13 +9,13 @@
     <form method="POST">
         {% csrf_token %}
         <label>Nome:</label> <br>
-        <input type="text" name="nome" class="form-control" required><br><br>
+        <input type="text" name="nome" class="form-control" maxlength="100" required><br><br>
 
         <label>Quantidade:</label> <br>
-        <input type="number" name="quantidade" class="form-control" required><br><br>
+        <input type="number" name="quantidade" class="form-control" maxlength="100" required><br><br>
 
         <label>Preço:</label> <br>
-        <input type="number" name="preco" step="0.01" class="form-control" required><br><br>
+        <input type="number" name="preco" step="0.01" class="form-control" maxlength="100" required><br><br>
 
         <button type="submit">Cadastrar</button>
     </form>
