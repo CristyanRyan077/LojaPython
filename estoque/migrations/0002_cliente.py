@@ -14,8 +14,8 @@ class Migration(migrations.Migration):
             name='Cliente',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nome', models.CharField(verbose_name=100)),
-                ('telefone', models.CharField(verbose_name=20)),
+                ('nome', models.CharField(max_length=100)),
+                ('telefone', models.CharField(max_length=20)),
             ],
         ),
     ]
