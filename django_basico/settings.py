@@ -16,6 +16,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 SECURE_HSTS_SECONDS = 30 * 24 * 60 * 60  # 1 mês (para começar)
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True    # Corrige W005
 SECURE_HSTS_PRELOAD = True      
@@ -35,7 +36,7 @@ SECRET_KEY = "Cu1xYpVQXNLj-kcKSC8GzRwdqwW4M8n0Y2pKHCVn4hxgcQrTyGVGJfgC6CoF81k6t3
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["cristyan.pythonanywhere.com", "localhost", "127.0.0.1"]
 
