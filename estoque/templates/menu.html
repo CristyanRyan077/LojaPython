@@ -25,12 +25,20 @@
       </a>
     </div>
     <div class="card">
-    <a href="{% url 'ver_estoque' %}">
+    <a href="{% url 'estoque_falta' %}">
       <h2>Produtos em Falta</h2>
       <p>{{produtos_emfalta}}</p>
        <a href="{% url 'adicionar_produto' %}" class="add-button">+</a>
     </a>
     </div>
+     <div class="card" style="width: 1000px; height: 350px;">
+    <a href="{% url 'ver_estoque' %}">
+      <h2>Ultimas modificações</h2>
+      <ul class="list-group">
+        {% for produto in data_modificacao %}
+        <li class="list-group-item">{{produto.nome}} - {{produto.data_modificacao}}</li>
+        {% endfor %}
+      </ul>
   </div>
 </div>
 {% endblock %}

@@ -9,20 +9,23 @@
             <table class="table table-bordered table-hover table-striped align-middle">
                 <thead class="table-primary text-center">
                     <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Quantidade</th>
-                        <th>Preço</th>
-                        <th style="width:180px;">Ação</th>
+                        <th style="width:100px;">ID</th>
+                        <th style="width:220px;">Nome</th>
+                        <th style="width:120px;">Quantidade</th>
+                        <th style="width:120px;">Preço</th>
+                        <th style="width:160px;">Data de criacão</th>
+                        <th style="width:120px;">Ação</th>
                     </tr>
                 </thead>
                 <tbody>
+
                     {% for produto in produtos %}
                     <tr>
                         <td>{{ produto.id }}</td>
                         <td>{{ produto.nome }}</td>
                         <td>{{ produto.quantidade }}</td>
                         <td>R$ {{ produto.preco }}</td>
+                        <td>{{ produto.data_criacao|date:"d/m/Y H:i"}}</td>
                         <div class="d-flex justify-content-center gap-2">
                         <td>
                             <a href="{% url 'editar_produto' produto.id %}" class="btn btn-primary btn-sm">Atualizar</a>

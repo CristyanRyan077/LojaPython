@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Menu Principal{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+         <h1 class="text-center mb-4">Estoque de Produtos</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped align-middle">
+                <thead class="table-primary text-center">
+                    <tr>
+                        <th style="width:40px;">ID</th>
+                        <th style="width:220px;">Nome</th>
+                        <th style="width:120px;">Quantidade</th>
+                        <th style="width:120px;">Preço</th>
+                        <th style="width:160px;">Data de criacão</th>
+                        <th style="width:120px;">Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        {% for produto in produtos %}
+                            {% if produto.quantidade == 0 %}
+                            <tr>
+                                <td>{{ produto.id }}</td>
+                                <td>{{ produto.nome }}</td>
+                                <td class="text-danger fw-bold">{{ produto.quantidade }}</td>
+                                <td>R$ {{ produto.preco }}</td>
+                                <td>{{ produto.data_criacao|date:"d/m/Y H:i" }}</td>
+                                <div class="d-flex justify-content-center gap-2">
+                                <td>
+                                    <a href="{% url 'editar_produto' produto.id %}" class="btn btn-primary btn-sm">Atualizar</a>
+                                    <a href="{% url 'remover_produto' produto.id %}" class="btn btn-danger btn-sm">Deletar</a>
+                                </td>
+                            </div>
+                            </tr>
+                                {% endif %}
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center">Nenhum produto no estoque.</td>
+                            </tr>
+                        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <style>
+         @media (max-width: 768px) {
+            table th:nth-child(5),
+            table td:nth-child(5) {
+                width: 120px !important;
+            }
+         }
+    </style>
+{% endblock %}
