@@ -37,6 +37,12 @@ def remover_produto(request, id):
     return redirect("ver_estoque")
 
 
+def remover_cliente(request, id):
+    cliente_del = get_object_or_404(Cliente, id=id)
+    cliente_del.delete()
+    return redirect("ver_clientes")
+
+
 def adicionar_produto(request):
     if request.method == "POST":
         nome = request.POST.get("nome")
@@ -51,6 +57,18 @@ def adicionar_produto(request):
     return render(request, "adicionar_produto.html")
 
 
+def adicionar_cliente(request):
+    if request.method == "POST":
+        nome = request.POST.get("nome")
+        telefone = request.POST.get("telefone")
+        Cliente.objects.create(
+            nome=nome.capitalize().strip(),
+            telefone=telefone.strip(),
+        )
+        return redirect("ver_menu")
+    return render(request, "adicionar_cliente.html")
+
+
 def editar_produto(request, id):
     produtos = get_object_or_404(produto, id=id)
     if request.method == "POST":
@@ -60,6 +78,16 @@ def editar_produto(request, id):
         produtos.save()
         return redirect("ver_estoque")
     return render(request, "editar_produto.html", {"produto": produtos})
+
+
+def editar_cliente(request, id):
+    clientes = get_object_or_404(Cliente, id=id)
+    if request.method == "POST":
+        clientes.nome = request.POST.get("nome")
+        clientes.telefone = request.POST.get("telefone")
+        clientes.save()
+        return redirect("ver_clientes")
+    return render(request, "editar_cliente.html", {"cliente": clientes})
 
 
 def ver_clientes(request):

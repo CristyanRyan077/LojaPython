@@ -21,9 +21,10 @@
       <a href="{% url 'ver_clientes' %}">
       <h2>Clientes Cadastrados</h2>
       <p>{{ clientes }}</p>
-      
+      <a href="{% url 'adicionar_cliente' %}" class="add-button">+</a>
       </a>
     </div>
+
     <div class="card">
     <a href="{% url 'estoque_falta' %}">
       <h2>Produtos em Falta</h2>

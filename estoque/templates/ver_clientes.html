@@ -9,8 +9,9 @@
             <table class="table table-bordered table-hover table-striped align-middle">
                 <thead class="table-primary text-center">
             <tr>
-                <th>Nome</th>
-                <th>Telefone</th>
+                <th style="width:200px;">Nome</th>
+                <th style="width:80px;">Telefone</th>
+                <th style="width:40px;">Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +19,10 @@
             <tr>
                 <td>{{ cliente.nome }}</td>
                 <td>{{ cliente.telefone }}
+                <td>
+                    <a href="{% url 'editar_cliente' cliente.id %}" class="btn btn-primary btn-sm">Atualizar</a>
+                    <a href="{% url 'remover_cliente' cliente.id %}" class="btn btn-danger btn-sm">Deletar</a>
+                </td>
             </tr>
             {% empty %}
             <tr>

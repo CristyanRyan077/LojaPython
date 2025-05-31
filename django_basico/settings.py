@@ -17,15 +17,14 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECURE_HSTS_SECONDS = 30 * 24 * 60 * 60  # 1 mês (para começar)
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Corrige W005
+SECURE_HSTS_SECONDS = 30 * 24 * 60 * 60
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 
 # Quick-start development settings - unsuitable for production
