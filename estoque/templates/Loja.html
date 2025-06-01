@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Loja Python{% endblock %}
+
+{% block content %}
+
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+    .hover-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .hover-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+</style>
+
+{% for produto in produtos %}
+  <a href="{% url 'editar_produto' produto.id %}"  class="text-decoration-none text-reset">
+    <div class="container my-4">
+      <div class="d-flex border rounded p-3 mb-3 align-items-start bg-white hover-card" style="background-color: #fff;">
+        <div class="flex-grow-1 me-3">
+         <h3 class="fw-bold mb-1">{{ produto.nome }}</h3>
+          <p class="mb-1 text-muted" style="font-size: 0.9rem;">
+          descrição do produto</p>
+          <span class="text-success fw-semibold">R$ {{ produto.preco }}</span>
+      </a>
+        </div>
+        <!-- imagem -->
+      </div>
+    </div>
+{% endfor %}
+
+
+
+{% endblock %}

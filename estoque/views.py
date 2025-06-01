@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import produto, Cliente
 
+def loja_python(request):
+    produtos = produto.objects.all()
+    return render(request, "Loja.html", {"produtos": produtos})
+
 
 def ver_estoque(request):
     produtos = produto.objects.all()
