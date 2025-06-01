@@ -13,6 +13,16 @@ class produto(models.Model):
     def __str__(self):
         return f"{self.nome} - {self.quantidade} unidades - R${self.preco:.2f}"
 
+class Compra(models.Model):
+    METODOS_PAGAMENTO = [
+        ('credito', 'Cartão de crédito'),
+        ('debito', 'Cartão de débito'),
+        ('pix', 'Pix'),
+    ]
+    produto = models.ForeignKey(produto, on_delete=models.CASCADE)
+    metodo_pagamento = models.CharField(max_length=10, choices=METODOS_PAGAMENTO)
+    endereco = models.CharField(max_length=255)
+    data_compra = models.DateTimeField(auto_now_add=True)
 
 class Cliente(models.Model):
     nome = models.CharField(max_length=100)
@@ -20,3 +30,4 @@ class Cliente(models.Model):
 
     def __str__(self):
         return f"Cliente: {self.nome} | Telefone: {self.telefone}"
+    

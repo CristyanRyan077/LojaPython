@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <div class="container mt-4">
   <h2>Editar Produto</h2>
@@ -6,16 +7,21 @@
     {% csrf_token %}
     <div class="mb-3">
       <label>Nome</label>
-      <input type="text" name="nome" class="form-control" value="{{ produto.nome }}" maxlength="30" required>
+      <input type="text" name="nome" class="form-control input-pequeno" value="{{ produto.nome }}" maxlength="30" required>
     </div>
     <div class="mb-3">
       <label>Quantidade</label>
-      <input type="number" name="quantidade" class="form-control" value="{{ produto.quantidade }}" min="0" max="99999" required>
+      <input type="number" name="quantidade" class="form-control input-pequeno" value="{{ produto.quantidade }}" min="0" max="99999" required>
     </div>
     <div class="mb-3">
       <label>Preço</label>
-      <input type="number" step="0.01" name="preco" class="form-control" value="{{ produto.preco|floatformat:2 }}" min="0" max="99999" required>
+      <input type="number" step="0.01" name="preco" class="form-control input-pequeno" value="{{ produto.preco|floatformat:2 }}" min="0" max="99999" required>
     </div>
+    <div class="mb-3">
+    <label>Descrição</label><br>
+    <input type="text" name="descricao" class="form-control input-pequeno" value="{{produto.descricao}}" maxlength="200"><br>
+    </div>
+
     <button type="submit" class="btn btn-primary">Salvar</button>
     <a href="{% url 'ver_estoque' %}" class="btn btn-danger">Cancelar</a>
   </form>
@@ -27,6 +33,12 @@
     <p>Produto: {{ produto.nome }}</p>
     <p>Quantidade: {{ produto.quantidade }}</p>
     <p>R${{ produto.preco }}</p>
+     {% if produto.imagem %}
+        <img class="img" src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">
+        {% else %}
+        <img src="{% static 'estoque/img/baixados.png' %}" alt="Sem imagem">
+        {% endif %}
+    
     </div>
 </div>
 {% endblock %}

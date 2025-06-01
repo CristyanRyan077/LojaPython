@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import produto, Cliente
+from .models import produto, Cliente, Compra
+from decimal import Decimal, InvalidOperation
+from django.contrib import messages
+
 
 def loja_python(request):
     produtos = produto.objects.all()
@@ -49,16 +52,20 @@ def remover_cliente(request, id):
 
 def adicionar_produto(request):
     if request.method == "POST":
+        try:
+            preco_formatado = request.POST.get("preco", "0").replace(",", ".")
+            preco_decimal = Decimal(preco_formatado)
+        except (InvalidOperation, ValueError):
+            preco_decimal = Decimal("0.00")
         nome = request.POST.get("nome")
         quantidade = request.POST.get("quantidade")
-        preco = request.POST.get("preco")
         descricao = request.POST.get("descricao")
-        imagem = request.FILES.get('imagem')
+        imagem = request.FILES.get("imagem")
 
         produto.objects.create(
             nome=nome.capitalize().strip(),
             quantidade=int(quantidade),
-            preco=float(preco),
+            preco=preco_decimal,
             descricao=descricao,
             imagem=imagem,
         )
@@ -81,9 +88,16 @@ def adicionar_cliente(request):
 def editar_produto(request, id):
     produtos = get_object_or_404(produto, id=id)
     if request.method == "POST":
+        try:
+            preco_formatado = request.POST.get("preco", "0").replace(",", ".")
+            preco_decimal = Decimal(preco_formatado)
+        except (InvalidOperation, ValueError):
+            preco_decimal = Decimal("0.00")
         produtos.nome = request.POST.get("nome")
         produtos.quantidade = request.POST.get("quantidade")
         produtos.preco = request.POST.get("preco")
+        produtos.descricao = request.POST.get("descricao")
+        produtos.imagem = request.FILES.get("imagem")
         preco_str = request.POST.get("preco", "").replace(",", ".")
         produtos.preco = preco_str
         produtos.save()
@@ -112,3 +126,27 @@ def ver_clientes(request):
             return redirect("ver_clientes")
     clientes = Cliente.objects.all()
     return render(request, "ver_clientes.html", {"clientes": clientes})
+
+
+def comprar_produto(request, id):
+    produtos = get_object_or_404(produto, id=id)
+    if request.method == "POST":
+        metodo_pagamento = request.POST.get("metodo_pagamento")
+        endereco = request.POST.get("endereco")
+        if not metodo_pagamento or not endereco:
+            messages.error(request, "Preencha todos os campos.")
+            return redirect("comprar_produto", id=id)
+        if produtos.quantidade > 0:
+            produtos.quantidade -= 1
+            produtos.save()
+            Compra.objects.create(
+                produto=produtos,
+                metodo_pagamento=metodo_pagamento,
+                endereco=endereco
+            )
+            messages.success(request, "Compra realizada com sucesso!")
+            return redirect("loja_python")
+        else:
+            messages.error(request, "Produto sem estoque disponível.")
+            return redirect("loja_python")
+    return render(request, "comprar_produto.html", {"produto": produtos})
