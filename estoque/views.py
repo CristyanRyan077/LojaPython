@@ -84,6 +84,8 @@ def editar_produto(request, id):
         produtos.nome = request.POST.get("nome")
         produtos.quantidade = request.POST.get("quantidade")
         produtos.preco = request.POST.get("preco")
+        preco_str = request.POST.get("preco", "").replace(",", ".")
+        produtos.preco = preco_str
         produtos.save()
         return redirect("ver_estoque")
     return render(request, "editar_produto.html", {"produto": produtos})
