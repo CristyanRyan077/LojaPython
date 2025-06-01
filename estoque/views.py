@@ -52,10 +52,15 @@ def adicionar_produto(request):
         nome = request.POST.get("nome")
         quantidade = request.POST.get("quantidade")
         preco = request.POST.get("preco")
+        descricao = request.POST.get("descricao")
+        imagem = request.FILES.get('imagem')
+
         produto.objects.create(
             nome=nome.capitalize().strip(),
             quantidade=int(quantidade),
             preco=float(preco),
+            descricao=descricao,
+            imagem=imagem,
         )
         return redirect("ver_menu")
     return render(request, "adicionar_produto.html")

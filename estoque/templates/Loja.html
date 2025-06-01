@@ -1,5 +1,6 @@
-{% extends "base.html" %}
 
+{% extends "base.html" %}
+{% load static %}
 {% block title %}Loja Python{% endblock %}
 
 {% block content %}
@@ -24,11 +25,15 @@
         <div class="flex-grow-1 me-3">
          <h3 class="fw-bold mb-1">{{ produto.nome }}</h3>
           <p class="mb-1 text-muted" style="font-size: 0.9rem;">
-          descrição do produto</p>
+          {{ produto.descricao }}</p>
           <span class="text-success fw-semibold">R$ {{ produto.preco }}</span>
       </a>
         </div>
-        <!-- imagem -->
+        {% if produto.imagem %}
+        <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">
+        {% else %}
+        <img src="{% static 'estoque/dynamite.jpeg' %}" alt="Sem imagem">
+        {% endif %}
       </div>
     </div>
 {% endfor %}
